@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model ThisIsIt.Models.MyCategory
+
+    <div class="row pt-4">
+        <div class="col-6">
+            <div class="card"style="width:800px;height:350px;">
+            <div class="card-header text-color:blue" style="align-content:center ">
+                    <h3 >Create Students List</h3>
+                </div>
+                <div class="card-body">
+                <form method="post" asp-controller="FireSpirit" asp-action="Create">
+                    <div class="col mb-3">
+
+                    <label asp-for="Name">Full Name</label>
+                    <input type="text" placeholder="Enter The Full Name" class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col mb-3">
+
+                    <label asp-for="Class">Class</label>
+                    <input type="number" placeholder="Enter The Class" class="form-control" asp-for="Class" />
+                        <span asp-validation-for="Class" class="text-danger"></span>
+
+                    </div>
+
+                        <div class="col mb-3">
+
+                        <label asp-for="PhoneNumber">PhoneNumber</label>
+                    <input type="number" placeholder="Enter The Phone Number" class="form-control"  asp-for="PhoneNumber" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" value="Index">Create</button>
+                    <a asp-controller="FireSpirit"asp-action="Index"class="btn btn-secondary"style="width:150px;">
+                        Back To List
+                    </a>
+                </form>
+                </div>
+            </div>
+        </div>
+</div>
+@section Scripts
+{
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+}
