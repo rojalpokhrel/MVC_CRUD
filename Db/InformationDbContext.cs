@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThisIsIt.Models;
-
 namespace ThisIsIt.Db
 {
     public class InformationDbContext : DbContext
@@ -8,7 +7,7 @@ namespace ThisIsIt.Db
         public InformationDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<MyCategory> Mycategorytable { get; set; }
+        public DbSet<MyCategory> Hellocategorytable { get; set; }
 
     }
 }

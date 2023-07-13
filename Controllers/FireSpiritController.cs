@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ThisIsIt.Db;
 using ThisIsIt.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using ThisIsIt.Models.ViewModels;
 
 namespace ThisIsIt.Controllers
 {
@@ -12,9 +17,64 @@ namespace ThisIsIt.Controllers
         {
             informationDbContext = informationDb;
         }
+        public IActionResult Details()
+        {
+          var data =   informationDbContext.Hellocategorytable.ToList();    
+            return View(data);
+        }
+        public IActionResult Firstpage()
+        {
+            return View();
+        }
+        
+        public IActionResult Login()
+        {
+            ClaimsPrincipal claimUser = HttpContext.User;
+            if(claimUser.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "FireSpirit");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel modelLogin)
+        {
+            if (modelLogin.Email == "adminlogin@gmail.com" && modelLogin.Password == "586473219")
+            {
+                List<Claim> claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
+                    new Claim("OtherProperties","Example Role")
+                };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                AuthenticationProperties properties = new AuthenticationProperties() {
+                    AllowRefresh = true,
+                IsPersistent = modelLogin.KeepLoggedIn
+                    };
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ValidateMessage"] = "User Don't Exists";
+            ViewData["ValidateMessageColor"] = "red";
+
+            return View();  
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> LogOut()
+        {
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View(nameof(Firstpage));
+        }
+
         public IActionResult Index()
         {
-            IEnumerable<MyCategory> categories = informationDbContext.Mycategorytable;
+            IEnumerable<MyCategory> categories = informationDbContext.Hellocategorytable;
             return View(categories);
         }
 
@@ -31,9 +91,9 @@ namespace ThisIsIt.Controllers
             
             if (ModelState.IsValid)
             {
-                informationDbContext.Mycategorytable.Add(obj);
+                informationDbContext.Hellocategorytable.Add(obj);
                 informationDbContext.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","FireSpirit");
 
             }
 
@@ -47,7 +107,7 @@ namespace ThisIsIt.Controllers
             {
                 return NotFound();
             }
-            var categoryfromdb=informationDbContext.Mycategorytable.Find(id);
+            var categoryfromdb=informationDbContext.Hellocategorytable.Find(id);
             if(categoryfromdb==null)
             {
                 return NotFound();
@@ -62,7 +122,7 @@ namespace ThisIsIt.Controllers
 
             if (ModelState.IsValid)
             {
-                informationDbContext.Mycategorytable.Update(obj);
+                informationDbContext.Hellocategorytable.Update(obj);
                 informationDbContext.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -74,7 +134,7 @@ namespace ThisIsIt.Controllers
 
         {
            
-            var categoryfromdb = informationDbContext.Mycategorytable.Find(id);
+            var categoryfromdb = informationDbContext.Hellocategorytable.Find(id);
             if (categoryfromdb == null)
             {
                 return NotFound();
@@ -89,7 +149,7 @@ namespace ThisIsIt.Controllers
 
             if (ModelState.IsValid)
             {
-                informationDbContext.Mycategorytable.Remove(obj);
+                informationDbContext.Hellocategorytable.Remove(obj);
                 informationDbContext.SaveChanges();
                 return RedirectToAction("Index");
 
