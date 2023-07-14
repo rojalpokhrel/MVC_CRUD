@@ -12,7 +12,7 @@ namespace ThisIsIt
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<InformationDbContext>(options =>
-           options.UseSqlServer(builder.Configuration.GetConnectionString("NewConnectionString")));
+           options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
