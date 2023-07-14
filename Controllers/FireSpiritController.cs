@@ -42,18 +42,13 @@ namespace ThisIsIt.Controllers
         {
             if (modelLogin.Email == "admin@gmail.com" && modelLogin.Password == "admin")
             {
-                //List<Claim> claims = new List<Claim>()
-                //{
-                //    new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
-                //    new Claim("OtherProperties","Example Role")
-                //};
-                //ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                //this area was causing problem
 
                // AuthenticationProperties properties = new AuthenticationProperties() {
                //     AllowRefresh = true,
                //// IsPersistent = modelLogin.KeepLoggedIn
                //     };
-                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                 return RedirectToAction(nameof(Index));
             }
