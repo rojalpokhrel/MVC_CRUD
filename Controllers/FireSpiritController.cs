@@ -40,20 +40,20 @@ namespace ThisIsIt.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel modelLogin)
         {
-            if (modelLogin.Email == "adminlogin@gmail.com" && modelLogin.Password == "586473219")
+            if (modelLogin.Email == "admin@gmail.com" && modelLogin.Password == "admin")
             {
-                List<Claim> claims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
-                    new Claim("OtherProperties","Example Role")
-                };
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                //List<Claim> claims = new List<Claim>()
+                //{
+                //    new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
+                //    new Claim("OtherProperties","Example Role")
+                //};
+                //ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                AuthenticationProperties properties = new AuthenticationProperties() {
-                    AllowRefresh = true,
-                IsPersistent = modelLogin.KeepLoggedIn
-                    };
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+               // AuthenticationProperties properties = new AuthenticationProperties() {
+               //     AllowRefresh = true,
+               //// IsPersistent = modelLogin.KeepLoggedIn
+               //     };
+                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                 return RedirectToAction(nameof(Index));
             }

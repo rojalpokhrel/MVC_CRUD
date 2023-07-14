@@ -19,11 +19,9 @@ namespace ThisIsIt
 
             });
             builder.Services.AddDbContext<InformationDbContext>(options =>
-<<<<<<< HEAD
-           options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-=======
+
            options.UseNpgsql(builder.Configuration.GetConnectionString("YoConnectionString")));
->>>>>>> 7a32dd0ca5fd5dda92e1b052744aac4efa30dbe8
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
