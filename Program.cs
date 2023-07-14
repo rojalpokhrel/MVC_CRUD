@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ThisIsIt.Db;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ThisIsIt
 {
@@ -11,8 +12,18 @@ namespace ThisIsIt
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>{/*Auth*/
+                option.LoginPath = "/FireSpirit/Login";
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+
+
+            });
             builder.Services.AddDbContext<InformationDbContext>(options =>
+<<<<<<< HEAD
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+=======
+           options.UseNpgsql(builder.Configuration.GetConnectionString("YoConnectionString")));
+>>>>>>> 7a32dd0ca5fd5dda92e1b052744aac4efa30dbe8
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -27,6 +38,8 @@ namespace ThisIsIt
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

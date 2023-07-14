@@ -4,7 +4,7 @@
 
     <div class="row pt-4">
         <div class="col-6">
-            <div class="card"style="width:800px;height:350px;">
+            <div class="card"style="width:800px;height:380px;">
             <div class="card-header text-color:blue" style="align-content:center ">
                     <h3 >Create Students List</h3>
                 </div>
@@ -27,15 +27,18 @@
                         <div class="col mb-3">
 
                         <label asp-for="PhoneNumber">PhoneNumber</label>
-                    <input type="number" placeholder="Enter The Phone Number" class="form-control"  asp-for="PhoneNumber" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    <input type="text" placeholder="Enter The Phone Number" class="form-control"  asp-for="PhoneNumber" />
+                        <span asp-validation-for="PhoneNumber " class="text-danger"></span>
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary" value="Index">Create</button>
-                    <a asp-controller="FireSpirit"asp-action="Index"class="btn btn-secondary"style="width:150px;">
+                    <button type="submit" class="btn btn-success" value="Index">Create</button>
+                    <button type="reset" class="btn btn-danger">Reset Data</button>
+                    <a asp-controller="FireSpirit"asp-action="Index"class="btn btn-info"style="width:150px; ">
+                        <i class="bi bi-box-arrow-in-left"></i>
                         Back To List
                     </a>
+                   
                 </form>
                 </div>
             </div>
