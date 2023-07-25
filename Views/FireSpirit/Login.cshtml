@@ -13,11 +13,13 @@
             <div class="col mb-3">
             <label for="">Email</label>
             <input type="email" placeholder="example@gmail.com"  asp-for="Email" class="form-control"/>
+                        <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
                     <div class="col mb-3">
                         
             <label for="">Password</label>
                         <input type="password" placeholder="Enter the password" asp-for="Password"class="form-control" />
+                        <span class="text-danger" asp-validation-for="Password"></span>
                     </div>
                
 
@@ -37,20 +39,9 @@
                     <div>
 
                    <input type="submit" class="btn btn-primary me-2" value="Sign In"/>
-                    <a asp-controller="FireSpirit" asp-action="Firstpage" class="btn btn-secondary" >GoBack</a><br />
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" >GoBack</a><br />
 
-                    @if(ViewData["ValidateMessage"]!=null)
-                        {
-                            <br/>
-                            <br/>
-                            {
-                                // Retrieve the ValidateMessageColor from ViewData
-                                var validateMessageColor = ViewData["ValidateMessageColor"] as string;
-
-
-                                <span style="color: @validateMessageColor;">@ViewData["ValidateMessage"]</span>
-                            }
-                        }
+                 
                     </div>
 
                 </form>
@@ -58,3 +49,10 @@
     </div>
 </div>
 </div>
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+}

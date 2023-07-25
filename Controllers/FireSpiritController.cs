@@ -39,10 +39,14 @@ namespace ThisIsIt.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel modelLogin)
-        {
-            if (modelLogin.Email == "admin@gmail.com" && modelLogin.Password == "admin")
+        {   
+
+            LoginModel loginModel = new LoginModel();   
+           
+            if (modelLogin.Email == "example@gmail.com" && modelLogin.Password == "admin")
             {
 
+                 loginModel.isLogin=true;   
                 //this area was causing problem
 
                // AuthenticationProperties properties = new AuthenticationProperties() {
@@ -52,8 +56,8 @@ namespace ThisIsIt.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ValidateMessage"] = "User Don't Exists";
-            ViewData["ValidateMessageColor"] = "red";
+
+            loginModel.isLogin = false; 
 
             return View();  
         }
@@ -62,8 +66,9 @@ namespace ThisIsIt.Controllers
         [Authorize]
         public async Task<IActionResult> LogOut()
         {
-
+            LoginModel loginModel = new LoginModel();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            loginModel.isLogin = false; 
             return View(nameof(Firstpage));
         }
 

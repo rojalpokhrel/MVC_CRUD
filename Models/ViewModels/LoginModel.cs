@@ -4,11 +4,15 @@ namespace ThisIsIt.Models.ViewModels
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage="Email is required")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
        
         public bool KeepLoggedIn { get; set; }
+        public bool isLogin { get; set; }   
+        public LoginModel() { 
+            isLogin = false;
+        } 
     }
 }
